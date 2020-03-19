@@ -16,14 +16,13 @@ interface Ninja {
 
 @injectable()
 class Ninja implements Ninja {
+@inject("Weapon") @named("strong")
     public katana: Weapon;
+    @inject("Weapon") @named("weak")
     public shuriken: Weapon;
     public constructor(
-        @inject("Weapon") @named("strong") katana: Weapon,
-        @inject("Weapon") @named("weak") shuriken: Weapon
     ) {
-        this.katana = katana;
-        this.shuriken = shuriken;
+      
     }
 }
 

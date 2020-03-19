@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const inversify_1 = require("inversify");
 require("reflect-metadata");
@@ -25,16 +22,20 @@ Shuriken = __decorate([
     inversify_1.injectable()
 ], Shuriken);
 let Ninja = class Ninja {
-    constructor(katana, shuriken) {
-        this.katana = katana;
-        this.shuriken = shuriken;
+    constructor() {
     }
 };
+__decorate([
+    inversify_1.inject("Weapon"), inversify_1.named("strong"),
+    __metadata("design:type", Object)
+], Ninja.prototype, "katana", void 0);
+__decorate([
+    inversify_1.inject("Weapon"), inversify_1.named("weak"),
+    __metadata("design:type", Object)
+], Ninja.prototype, "shuriken", void 0);
 Ninja = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject("Weapon")), __param(0, inversify_1.named("strong")),
-    __param(1, inversify_1.inject("Weapon")), __param(1, inversify_1.named("weak")),
-    __metadata("design:paramtypes", [Object, Object])
+    __metadata("design:paramtypes", [])
 ], Ninja);
 const container = new inversify_1.Container();
 container.bind("Ninja").to(Ninja);
